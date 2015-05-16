@@ -1,0 +1,117 @@
+\usepackage{tocloft,enumerate,paralist,amsmath,lmodern,tikz,array}
+\usepackage[fancyhdr,fntef,space]{ctexcap}
+\usepackage[top=25mm,bottom=20mm,left=30mm,right=30mm,includefoot,xetex]{geometry}
+\usepackage[labelsep=quad,belowskip=5pt,aboveskip=5pt]{caption}
+%\hypersetup{citecolor=magenta,linkcolor=blue}%设置超链接颜色，打印版本可使用下一行设置
+\hypersetup{allcolors=black}
+\hypersetup{pdfencoding=auto,pdfauthor=Qingqing\ Cao,pdfsubject=bsthesis}
+
+%%设置图表标题格式
+\DeclareCaptionFont{hei}{\heiti\zihao{-4}}
+\DeclareCaptionFont{song}{\songti\zihao{-4}}
+\captionsetup[table]{font=hei}
+\captionsetup[figure]{font=song}
+
+%%%%%设置目录样式
+\setlength\cftaftertoctitleskip{0ex}
+\renewcommand\cftchapafterpnum{\vskip5pt}
+\renewcommand\cftsecafterpnum{\vskip3pt}
+\renewcommand\cftsubsecafterpnum{\vskip2pt}
+\setlength{\cftsecindent}{1.85em}
+\setlength{\cftsubsecindent}{1.85em}
+\setlength{\cftsubsubsecindent}{1.85em}
+
+\setlength\cftbeforetoctitleskip{-1cm}
+\renewcommand{\cfttoctitlefont}{\hfill\heiti\zihao{-2}}%目录标题 黑体小 2 号
+\renewcommand{\cftaftertoctitle}{\hfill}
+
+\renewcommand\cftchapfont{\heiti\zihao{4}}%目录内容中章的标题 黑体 4 号
+\renewcommand\cftsecfont{\songti\zihao{-4}}%目录中其他内容 宋体小 4 号
+\renewcommand\cftsubsecfont{\songti\zihao{-4}}%目录中其他内容 宋体小 4 号
+\renewcommand\cftsubsubsecfont{\songti\zihao{-4}}%目录中其他内容 宋体小 4 号
+
+\renewcommand\cftchappagefont{\heiti\zihao{4}}
+\renewcommand\cftsecpagefont{\songti\zihao{-4}}%目录页码字体
+\renewcommand\cftsubsecpagefont{\songti\zihao{-4}}
+\renewcommand\cftsubsubsecpagefont{\songti\zihao{-4}}
+
+%%%%%章节标题样式
+\CTEXsetup[format+={\heiti \zihao{-2}},nameformat={},titleformat={},%
+number={\arabic{chapter}},afterskip={1.5ex},beforeskip={0ex}]{chapter}% 各章标题 黑体小 2 号
+\CTEXsetup[format={\heiti \zihao{4}\raggedright}]{section}%各节的一级标题 黑体 4 号
+\CTEXsetup[format={\heiti \zihao{-4}\raggedright}]{subsection}% 各节的二级标题 黑体小 4 号
+\CTEXsetup[format={\heiti \zihao{-4}\raggedright}]{subsubsection}%各节的三级标题 黑体小 4 号
+\CTEXsetup[name={附录},number={\Alph{chapter}}]{appendix}
+\setcounter{tocdepth}{2}
+\setcounter{secnumdepth}{3}
+
+
+%%修改图表的标题字体
+\renewcommand\figurename{\songti\zihao{-4} 图}
+\renewcommand\tablename{\heiti\zihao{-4} 表}
+
+\pagestyle{fancy}
+\fancyhf{}  %清除以前对页眉页脚的设置
+\renewcommand{\headrulewidth}{0pt}
+
+
+\bibliographystyle{abbrv}        % 参考文献样式,  plain,unsrt,alpha,abbrv,chinesebst 等等
+\newcommand{\upcite}[1]{\textsuperscript{\cite{#1}}}  %自定义新命令\upcite, 使参考文献引用以上标出现
+
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{%
+\node[shape=circle,draw,inner sep=0.5pt] (char) {#1};}}%圆圈数字①
+
+%%更改公式编号中括号为中文括号
+\makeatletter
+\def\tagform@#1{\maketag@@@{（\ignorespaces#1\unskip\@@italiccorr）}}
+\renewcommand{\eqref}[1]{\textup{{\normalfont（\ref{#1}）\normalfont}}}
+\makeatother
+
+%%修改脚注样式
+\makeatletter%
+\long\def\@makefnmark{%
+\hbox {{\normalfont \textsuperscript{\circled{\@thefnmark}}}}}%
+\makeatother
+\makeatletter%
+\long\def\@makefntext#1{%
+  \parindent 1em\noindent \hb@xt@ 1.8em{\hss \circled{\@thefnmark}}#1}%
+\makeatother
+\skip\footins=10mm plus 1mm
+\footnotesep=6pt
+\renewcommand{\footnotesize}{\songti\zihao{5}}
+\renewcommand\footnoterule{\vspace*{-3pt}\hrule width 0.3\columnwidth height 1pt \vspace*{2.6pt}}
+
+\graphicspath{{figures/}} % 图片文件路径
+
+\renewcommand{\normalsize}{\zihao{-4}} %正常字号
+\setmainfont{Times New Roman}
+\setsansfont{Times New Roman}
+
+
+
+\newtoks\StudentNumber %学号
+\newtoks\miji %密级,空着
+
+\newtoks\Cmajor %学科专业中文名
+\newtoks\Emajor %学科专业英文名
+
+\newtoks\Ctitle %中文题目
+\newtoks\Etitle %英文题目
+
+\newtoks\Cauthor %作者名字
+\newtoks\Eauthor %作者英文名
+
+\newtoks\Esupervisor %指导教师英文名
+\newtoks\Csupervisor %指导教师中文名
+
+\newtoks\Eschoolname %学院英文名
+\newtoks\Cschoolname %学院中文名
+
+\newtoks\Cdate %日期
+\newtoks\Edate %英文日期
+
+\newtoks\CNabstract
+\newtoks\CNkeywords
+
+\newtoks\ENabstract
+\newtoks\ENkeywords
